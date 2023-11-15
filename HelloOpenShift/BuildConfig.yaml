@@ -1,0 +1,15 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: "hello-open-shift"
+spec:
+  source:
+    git:
+      uri: https://github.com/zeroamps/open-shift.git
+    contextDir: HelloOpenShift
+  strategy:
+    dockerStrategy:
+  output:
+    to:
+      kind: "ImageStreamTag"
+      name: "hello-open-shift:latest"
