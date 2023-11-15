@@ -1,0 +1,50 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: hello
+  labels:
+    app.kubernetes.io/part-of: sample
+spec:
+  selector:
+    matchLabels:
+      name: hello
+  template:
+    metadata:
+      labels:
+        name: hello
+    spec:
+      containers:
+        - name: hello
+          image: default-route-openshift-image-registry.apps.sandbox-m3.1530.p1.openshiftapps.com/jozef-chovan-dev/hello-open-shift:latest
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello
+spec:
+  ports:
+    - name: http
+      port: 8080
+  selector:
+    name: hello
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: hello
+spec:
+  host: hello.apps.sandbox-m3.1530.p1.openshiftapps.com
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: hello
