@@ -10,7 +10,14 @@ spec:
   strategy:
     dockerStrategy:
       dockerfilePath: Deployment/Dockerfile
+  triggers:
+    - type: "GitHub"
+      github:
+        secretReference:
+          name: builder-github-token
   output:
     to:
       kind: "ImageStreamTag"
       name: "hello-open-shift:latest"
+  failedBuildsHistoryLimit: 1
+  successfulBuildsHistoryLimit: 1
