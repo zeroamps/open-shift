@@ -9,7 +9,7 @@ spec:
     contextDir: HelloOpenShift
   strategy:
     dockerStrategy:
-      dockerfilePath: Deployment
+      dockerfilePath: Deployment/Dockerfile
   output:
     to:
       kind: "ImageStreamTag"
