@@ -6,6 +6,7 @@ spec:
   source:
     git:
       uri: https://github.com/zeroamps/open-shift.git
+      ref: "main"
     contextDir: HelloOpenShift
   strategy:
     dockerStrategy:
@@ -14,7 +15,7 @@ spec:
     - type: "GitHub"
       github:
         secretReference:
-          name: builder-github-token
+          name: "builder-github-token"
   output:
     to:
       kind: "ImageStreamTag"
